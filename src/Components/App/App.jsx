@@ -46,7 +46,6 @@ const App = () => {
   };
 
   const delList = (idList) => {
-    console.log(idList);
     dispatch(newDelContact(contacts.filter((item) => item.id === idList)));
   };
 
