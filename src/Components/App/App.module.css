@@ -1,0 +1,10 @@
+.formWrap {
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+
+  width: 300px;
+  background-color: aqua;
+  border: 1px solid black;
+  margin-bottom: 20px;
+}

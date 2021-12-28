@@ -1,0 +1,14 @@
+.styleList {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+
+  background-color: aqua;
+  border: 1px ridge black;
+}
+
+.styleContact {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid palevioletred;
+}
