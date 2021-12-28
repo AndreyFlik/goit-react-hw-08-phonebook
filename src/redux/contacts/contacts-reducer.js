@@ -1,8 +1,4 @@
 import { createReducer, combineReducers } from "@reduxjs/toolkit";
-// setContact,
-// addContact,
-// delContact,
-// import { changeFilter } from "../contacts/contacts-actions";
 
 import {
   getContacts,
@@ -10,17 +6,6 @@ import {
   newDelContact,
   changeFilter,
 } from "./contscts-operations";
-// import {
-//   setContactRequest,
-//   setContactSuccess,
-//   setContactError,
-//   addContactRequest,
-//   addContactSuccess,
-//   addContactError,
-//   delContactRequest,
-//   delContactSuccess,
-//   delContactError,
-// } from "../contacts/contacts-actions";
 
 // {
 //   contacts: {
@@ -40,13 +25,7 @@ const entities = createReducer([], {
   [newDelContact.fulfilled]: (state, action) =>
     state.filter((item) => item.id !== action.payload.id),
 });
-// const entities = createReducer([], {
-//   [setContactSuccess]: (_, action) => action.payload,
-//   [addContactSuccess]: (state, action) => [action.payload, ...state],
-//   [delContactSuccess]: (state, action) =>
-//     state.filter((item) => item.id !== action.payload.id),
-// });
-// .filter((itemId) => console.log(itemId.id))
+
 const isLoading = createReducer(false, {
   [getContacts.pending]: () => true,
   [getContacts.fulfilled]: () => false,
@@ -58,33 +37,14 @@ const isLoading = createReducer(false, {
   [newDelContact.fulfilled]: () => false,
   [newDelContact.rejected]: () => false,
 });
-// const isLoading = createReducer(false, {
-//   [setContactRequest]: () => true,
-//   [setContactSuccess]: () => false,
-//   [setContactError]: () => false,
-//   [addContactRequest]: () => true,
-//   [addContactSuccess]: () => false,
-//   [addContactError]: () => false,
-//   [delContactRequest]: () => true,
-//   [delContactSuccess]: () => false,
-//   [delContactError]: () => false,
-// });
-
 const entitiesFilter = createReducer("", {
   [changeFilter]: (_, action) => action.payload,
 });
-// const filterReducer = createReducer("", (builder) => {
-//   builder.addCase(changeFilter, (_, action) => action.payload);
-// });
 
 const contactsReducer = combineReducers({
   items: entities,
   filter: entitiesFilter,
   loading: isLoading,
 });
-// const contactsReducer = combineReducers({
-//   items: itemsReducer,
-//   filter: filterReducer,
-// });
 
 export default contactsReducer;

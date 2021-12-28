@@ -8,7 +8,7 @@ import {
   newDelContact,
   changeFilter,
 } from "../../redux/contacts/contscts-operations";
-// import * as actions from "../../../src/redux/contacts/contacts-actions";
+
 import Form from "../Form/Form";
 import ContactList from "../ContactList/ContactList";
 import Filter from "../Filter/Filter";
@@ -28,7 +28,6 @@ const App = () => {
     dispatch(changeFilter(e.target.value));
   };
   const addContact = (data) => {
-    // console.log(data);
     const clear = contacts.some(
       ({ name }) => name.toLowerCase() === data.name.toLowerCase()
     );
