@@ -37,10 +37,8 @@ import {
 const entities = createReducer([], {
   [getContacts.fulfilled]: (_, action) => action.payload,
   [addNewContacts.fulfilled]: (state, action) => [action.payload, ...state],
-  [newDelContact.fulfilled]: (state, action) => {
-    console.log(state);
-    state.filter((item) => item.id !== action.payload.id);
-  },
+  [newDelContact.fulfilled]: (state, action) =>
+    state.filter((item) => item.id !== action.payload.id),
 });
 // const entities = createReducer([], {
 //   [setContactSuccess]: (_, action) => action.payload,
