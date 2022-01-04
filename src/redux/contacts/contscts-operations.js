@@ -3,6 +3,7 @@ import {
   addContact,
   delContact,
   register,
+  login,
 } from "../../Components/services/api";
 
 import { createAsyncThunk, createAction } from "@reduxjs/toolkit";
@@ -69,3 +70,13 @@ export const addNewAccount = createAsyncThunk(
     }
   }
 );
+
+export const loginAccount = createAsyncThunk("auth/login", async (logAcc) => {
+  try {
+    console.log(logAcc);
+    const newRegister = await login(logAcc);
+    return newRegister;
+  } catch (error) {
+    console.log(error);
+  }
+});

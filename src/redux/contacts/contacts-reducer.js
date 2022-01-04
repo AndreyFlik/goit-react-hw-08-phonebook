@@ -6,6 +6,7 @@ import {
   newDelContact,
   changeFilter,
   addNewAccount,
+  loginAccount,
 } from "./contscts-operations";
 
 // {
@@ -50,10 +51,12 @@ const entitiesFilter = createReducer("", {
 
 const account = createReducer(null, {
   [addNewAccount.fulfilled]: (_, action) => [action.payload],
+  [loginAccount.fulfilled]: (_, action) => [action.payload],
 });
 
 const isLogin = createReducer(false, {
   [addNewAccount.fulfilled]: () => true,
+  [loginAccount.fulfilled]: () => true,
 });
 
 const contactsReducer = combineReducers({

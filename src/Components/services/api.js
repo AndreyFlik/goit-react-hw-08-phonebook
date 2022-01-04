@@ -61,4 +61,13 @@ const register = async (newAcc) => {
   return res.json();
 };
 
-export { register };
+const login = async (logAcc) => {
+  // console.log(logAcc);
+  const res = await fetch(`${BASE_URLL}/users/login`, post(logAcc));
+  if (!res.ok) {
+    return Promise.reject(new Error(res.statusText));
+  }
+  return res.json();
+};
+
+export { register, login };
