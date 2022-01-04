@@ -35,3 +35,30 @@ const delContact = async (contacts) => {
   return res.json();
 };
 export { fetchContacts, addContact, delContact };
+
+const BASE_URLL = "https://connections-api.herokuapp.com";
+
+/*
+ * POST @ /users/signup
+ * body: { name, email, password }
+ * После успешной регистрации добавляем токен в HTTP-заголовок
+ */
+
+const post = (postnewAcc) => ({
+  method: "POST",
+  body: JSON.stringify(postnewAcc),
+  headers: {
+    "Content-Type": "application/json; charset=UTF-8",
+  },
+});
+
+const register = async (newAcc) => {
+  // console.log(newAcc);
+  const res = await fetch(`${BASE_URLL}/users/signup`, post(newAcc));
+  if (!res.ok) {
+    return Promise.reject(new Error(res.statusText));
+  }
+  return res.json();
+};
+
+export { register };

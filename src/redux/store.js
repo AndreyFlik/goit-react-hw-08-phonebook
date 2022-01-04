@@ -1,7 +1,10 @@
 import { createLogger } from "redux-logger";
 import { configureStore } from "@reduxjs/toolkit";
 // import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
-import contactsReducer from "../redux/contacts/contacts-reducer";
+import {
+  contactsReducer,
+  authReducer,
+} from "../redux/contacts/contacts-reducer";
 // import {
 //   persistStore,
 //   persistReducer,
@@ -28,6 +31,7 @@ const store = configureStore({
   reducer: {
     // contacts: persistReducer(persistContactsConfig, contactsReducer),
     contacts: contactsReducer,
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== "production",
