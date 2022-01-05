@@ -4,15 +4,19 @@ import { logOut } from "../../redux/contacts/contscts-operations";
 
 const UserMenu = () => {
   const dispatch = useDispatch();
-  const name = useSelector((state) => state.account[0].user.name);
+  const name = useSelector((state) => state.account.user.name);
   // console.log(name);
   return (
-    <div>
-      <span>Добро пожаловать,{name} </span>
-      <button type="button" onClick={() => dispatch(logOut())}>
-        Выйти
-      </button>
-    </div>
+    <>
+      {name && (
+        <div>
+          <span>Добро пожаловать,{name} </span>
+          <button type="button" onClick={() => dispatch(logOut())}>
+            Выйти
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 

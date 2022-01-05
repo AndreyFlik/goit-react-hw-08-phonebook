@@ -7,6 +7,7 @@ import {
   changeFilter,
   addNewAccount,
   loginAccount,
+  logOut,
 } from "./contscts-operations";
 
 // {
@@ -43,15 +44,15 @@ const entitiesFilter = createReducer("", {
   [changeFilter]: (_, action) => action.payload,
 });
 
-// const initialState = {
-//   user: { name: null, email: null },
-//   token: null,
-//   isLogin: false,
-// };
+const initialState = {
+  user: { name: null, email: null },
+  token: null,
+};
 
-const account = createReducer(null, {
-  [addNewAccount.fulfilled]: (_, action) => [action.payload],
-  [loginAccount.fulfilled]: (_, action) => [action.payload],
+const account = createReducer(initialState, {
+  [addNewAccount.fulfilled]: (_, action) => action.payload,
+  [loginAccount.fulfilled]: (_, action) => action.payload,
+  [logOut.fulfilled]: () => initialState,
 });
 
 const isLogin = createReducer(false, {

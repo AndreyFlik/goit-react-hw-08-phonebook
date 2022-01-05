@@ -39,7 +39,7 @@ const Contacts = () => {
         addNewContacts({
           // id: nanoid(),
           name: data.name,
-          phone: data.number,
+          number: data.number,
         })
       );
     }

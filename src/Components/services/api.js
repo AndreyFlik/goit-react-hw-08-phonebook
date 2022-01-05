@@ -1,23 +1,38 @@
-const BASE_URL = "https://61c47b11f1af4a0017d995b3.mockapi.io/contacts";
+const BASE_URL = "https://connections-api.herokuapp.com";
 
-const fetchContacts = async () => {
-  const res = await fetch(`${BASE_URL}`);
+const post = (postnewAcc) => ({
+  method: "POST",
+  body: JSON.stringify(postnewAcc),
+  headers: {
+    "Content-Type": "application/json; charset=UTF-8",
+  },
+});
+
+const fetchContacts = async (token) => {
+  const res = await fetch(`${BASE_URL}/contacts`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+  });
   if (!res.ok) {
     return Promise.reject(new Error(res.statusText));
   }
   return res.json();
 };
 
-const optionsPost = (postToAdd) => ({
+const optionsPost = (postToAdd, token) => ({
   method: "POST",
   body: JSON.stringify(postToAdd),
   headers: {
+    Authorization: `Bearer ${token}`,
     "Content-Type": "application/json; charset=UTF-8",
   },
 });
 
-const addContact = async (contact) => {
-  const res = await fetch(`${BASE_URL}`, optionsPost(contact));
+const addContact = async (contact, token) => {
+  const res = await fetch(`${BASE_URL}/contacts`, optionsPost(contact, token));
   if (!res.ok) {
     return Promise.reject(new Error(res.statusText));
   }
@@ -36,29 +51,19 @@ const delContact = async (contacts) => {
 };
 export { fetchContacts, addContact, delContact };
 
-const BASE_URLL = "https://connections-api.herokuapp.com";
-
-const post = (postnewAcc) => ({
-  method: "POST",
-  body: JSON.stringify(postnewAcc),
-  headers: {
-    "Content-Type": "application/json; charset=UTF-8",
-  },
-});
+// const BASE_URLL = "https://connections-api.herokuapp.com";
 
 const register = async (newAcc) => {
-  // console.log();
-  const res = await fetch(`${BASE_URLL}/users/signup`, post(newAcc));
+  const res = await fetch(`${BASE_URL}/users/signup`, post(newAcc));
   if (!res.ok) {
     return Promise.reject(new Error(res.statusText));
   }
-
   return res.json();
 };
 
 const login = async (logAcc) => {
   // console.log();
-  const res = await fetch(`${BASE_URLL}/users/login`, post(logAcc));
+  const res = await fetch(`${BASE_URL}/users/login`, post(logAcc));
   if (!res.ok) {
     return Promise.reject(new Error(res.statusText));
   }
@@ -68,7 +73,7 @@ const login = async (logAcc) => {
 const loginOut = async (token) => {
   // const state = thunkAPI.getState();
   console.log(token);
-  const res = await fetch(`${BASE_URLL}/users/logout`, {
+  const res = await fetch(`${BASE_URL}/users/logout`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,

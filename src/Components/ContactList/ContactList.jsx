@@ -8,7 +8,7 @@ const ContactList = ({ filtered, del }) => {
     <ul className={s.styleList}>
       {filtered.map((contact) => (
         <li key={contact.id} className={s.styleContact}>
-          Name: {contact.name} Tel: {contact.phone}
+          Name: {contact.name} Tel: {contact.number}
           <button onClick={() => del(contact.id)} type="button">
             Delete
           </button>
