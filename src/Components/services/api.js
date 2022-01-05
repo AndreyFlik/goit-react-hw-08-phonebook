@@ -44,30 +44,39 @@ const BASE_URLL = "https://connections-api.herokuapp.com";
  * После успешной регистрации добавляем токен в HTTP-заголовок
  */
 
-const post = (postnewAcc) => ({
+const post = (postnewAcc, token) => ({
   method: "POST",
   body: JSON.stringify(postnewAcc),
   headers: {
+    Autorization: `Bearer ${token}`,
     "Content-Type": "application/json; charset=UTF-8",
   },
 });
 
-const register = async (newAcc) => {
-  // console.log(newAcc);
-  const res = await fetch(`${BASE_URLL}/users/signup`, post(newAcc));
+const register = async (newAcc, token) => {
+  // console.log(token);
+  const res = await fetch(`${BASE_URLL}/users/signup`, post(newAcc, token));
   if (!res.ok) {
     return Promise.reject(new Error(res.statusText));
   }
   return res.json();
 };
 
-const login = async (logAcc) => {
-  // console.log(logAcc);
-  const res = await fetch(`${BASE_URLL}/users/login`, post(logAcc));
+const login = async (logAcc, token) => {
+  console.log(token);
+  const res = await fetch(`${BASE_URLL}/users/login`, post(logAcc, token));
   if (!res.ok) {
     return Promise.reject(new Error(res.statusText));
   }
   return res.json();
 };
 
-export { register, login };
+const loginOut = async (_, token) => {
+  // console.log();
+  const res = await fetch(`${BASE_URLL}/users/logout`, post(_, token));
+  if (!res.ok) {
+    return Promise.reject(new Error(res.statusText));
+  }
+  return res.json();
+};
+export { register, login, loginOut };

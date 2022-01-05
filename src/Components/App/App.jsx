@@ -1,37 +1,28 @@
 import React from "react";
 import { NavLink, Route, Switch } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Contacts from "../Contacts/Contacts";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import UserMenu from "../UserMenu/UserMenu";
 
 const App = () => {
+  const isLogIn = useSelector((state) => state.isLogin);
   return (
     <>
       <nav>
-        {/* <nav className={s.Nav}> */}
-        <NavLink
-          to="/Login"
-          exact
-          // className={s.link}
-          // activeClassName={s.activeLink}
-        >
-          Login
-        </NavLink>
-        <NavLink
-          to="/Register"
-          exact
-          // className={s.link}
-          // activeClassName={s.activeLink}
-        >
-          Register
-        </NavLink>
-        <NavLink
-          to="/Contacts"
-          // className={s.link}
-          // activeClassName={s.activeLink}
-        >
-          Contacts
-        </NavLink>
+        {!isLogIn && (
+          <NavLink to="/Login" exact>
+            Login
+          </NavLink>
+        )}
+        {!isLogIn && (
+          <NavLink to="/Register" exact>
+            Register
+          </NavLink>
+        )}
+        {isLogIn && <NavLink to="/Contacts">Contacts</NavLink>}
+        {isLogIn && <UserMenu />}
       </nav>
       <Switch>
         <Route path="/Login">

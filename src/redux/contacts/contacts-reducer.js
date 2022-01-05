@@ -64,6 +64,6 @@ const contactsReducer = combineReducers({
   filter: entitiesFilter,
   loading: isLoading,
 });
-const authReducer = combineReducers({ account, isLogin });
+// const authReducer = combineReducers({ account, isLogin });
 
-export { contactsReducer, authReducer };
+export { contactsReducer, account, isLogin };

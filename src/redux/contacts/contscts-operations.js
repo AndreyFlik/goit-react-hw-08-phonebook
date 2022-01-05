@@ -4,6 +4,7 @@ import {
   delContact,
   register,
   login,
+  loginOut,
 } from "../../Components/services/api";
 
 import { createAsyncThunk, createAction } from "@reduxjs/toolkit";
@@ -60,10 +61,14 @@ export const newDelContact = createAsyncThunk(
 
 export const addNewAccount = createAsyncThunk(
   "auth/register",
-  async (newAccount) => {
+  async (newAccount, token) => {
     try {
       console.log(newAccount);
-      const newRegister = await register(newAccount);
+      // console.log(token);
+      const newRegister = await register(newAccount, token);
+      // console.log(newRegister.token);
+      token = newRegister.token;
+      console.log(token);
       return newRegister;
     } catch (error) {
       console.log(error);
@@ -71,10 +76,27 @@ export const addNewAccount = createAsyncThunk(
   }
 );
 
-export const loginAccount = createAsyncThunk("auth/login", async (logAcc) => {
+export const loginAccount = createAsyncThunk(
+  "auth/login",
+  async (logAcc, token) => {
+    try {
+      console.log(logAcc);
+      const newRegister = await login(logAcc, token);
+      // token = newRegister.token;
+      console.log(newRegister);
+      return newRegister;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const logOut = createAsyncThunk("auth/logout", async (_, token) => {
   try {
-    console.log(logAcc);
-    const newRegister = await login(logAcc);
+    // console.log(logAcc);
+    const newRegister = await loginOut(_, token);
+    token = null;
+    console.log(token);
     return newRegister;
   } catch (error) {
     console.log(error);
