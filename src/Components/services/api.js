@@ -38,42 +38,43 @@ export { fetchContacts, addContact, delContact };
 
 const BASE_URLL = "https://connections-api.herokuapp.com";
 
-/*
- * POST @ /users/signup
- * body: { name, email, password }
- * После успешной регистрации добавляем токен в HTTP-заголовок
- */
-
-const post = (postnewAcc, token) => ({
+const post = (postnewAcc) => ({
   method: "POST",
   body: JSON.stringify(postnewAcc),
   headers: {
-    Autorization: `Bearer ${token}`,
     "Content-Type": "application/json; charset=UTF-8",
   },
 });
 
-const register = async (newAcc, token) => {
-  // console.log(token);
-  const res = await fetch(`${BASE_URLL}/users/signup`, post(newAcc, token));
-  if (!res.ok) {
-    return Promise.reject(new Error(res.statusText));
-  }
-  return res.json();
-};
-
-const login = async (logAcc, token) => {
-  console.log(token);
-  const res = await fetch(`${BASE_URLL}/users/login`, post(logAcc, token));
-  if (!res.ok) {
-    return Promise.reject(new Error(res.statusText));
-  }
-  return res.json();
-};
-
-const loginOut = async (_, token) => {
+const register = async (newAcc) => {
   // console.log();
-  const res = await fetch(`${BASE_URLL}/users/logout`, post(_, token));
+  const res = await fetch(`${BASE_URLL}/users/signup`, post(newAcc));
+  if (!res.ok) {
+    return Promise.reject(new Error(res.statusText));
+  }
+
+  return res.json();
+};
+
+const login = async (logAcc) => {
+  // console.log();
+  const res = await fetch(`${BASE_URLL}/users/login`, post(logAcc));
+  if (!res.ok) {
+    return Promise.reject(new Error(res.statusText));
+  }
+  return res.json();
+};
+
+const loginOut = async (token) => {
+  // const state = thunkAPI.getState();
+  console.log(token);
+  const res = await fetch(`${BASE_URLL}/users/logout`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+  });
   if (!res.ok) {
     return Promise.reject(new Error(res.statusText));
   }

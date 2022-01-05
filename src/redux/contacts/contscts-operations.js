@@ -35,40 +35,11 @@ export const newDelContact = createAsyncThunk(
   }
 );
 
-// /*
-//  * POST @ /users/signup
-//  * body: { name, email, password }
-//  * После успешной регистрации добавляем токен в HTTP-заголовок
-//  */
-// const register = createAsyncThunk("auth/register", async (credentials) => {
-//   try {
-//     const { data } = await axios.post("/users/signup", credentials);
-//     token.set(data.token);
-//     return data;
-//   } catch (error) {
-//     // TODO: Добавить обработку ошибки error.message
-//   }
-// });
-
-// const token = {
-//   set(token) {
-//     const setToken = `Bearer ${token}`;
-//   },
-//   unset() {
-//     const unsetToken = "";
-//   },
-// };
-
 export const addNewAccount = createAsyncThunk(
   "auth/register",
-  async (newAccount, token) => {
+  async (newAccount) => {
     try {
-      console.log(newAccount);
-      // console.log(token);
-      const newRegister = await register(newAccount, token);
-      // console.log(newRegister.token);
-      token = newRegister.token;
-      console.log(token);
+      const newRegister = await register(newAccount);
       return newRegister;
     } catch (error) {
       console.log(error);
@@ -78,12 +49,9 @@ export const addNewAccount = createAsyncThunk(
 
 export const loginAccount = createAsyncThunk(
   "auth/login",
-  async (logAcc, token) => {
+  async (logAcc, thunkAPI) => {
     try {
-      console.log(logAcc);
-      const newRegister = await login(logAcc, token);
-      // token = newRegister.token;
-      console.log(newRegister);
+      const newRegister = await login(logAcc);
       return newRegister;
     } catch (error) {
       console.log(error);
@@ -91,12 +59,12 @@ export const loginAccount = createAsyncThunk(
   }
 );
 
-export const logOut = createAsyncThunk("auth/logout", async (_, token) => {
+export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
-    // console.log(logAcc);
-    const newRegister = await loginOut(_, token);
-    token = null;
-    console.log(token);
+    const state = thunkAPI.getState();
+    // console.log(state.account[0].token);
+    const newRegister = await loginOut(state.account[0].token);
+    // state.account[0].token = null;
     return newRegister;
   } catch (error) {
     console.log(error);
