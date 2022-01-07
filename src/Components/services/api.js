@@ -39,10 +39,13 @@ const addContact = async (contact, token) => {
   return res.json();
 };
 
-const delContact = async (contacts) => {
-  //   console.log(contacts[0].id);
-  const res = await fetch(`${BASE_URL}/${contacts[0].id}`, {
+const delContact = async (contacts, token) => {
+  console.log(contacts[0].id);
+  const res = await fetch(`${BASE_URL}/contacts/${contacts[0].id}`, {
     method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
   if (!res.ok) {
     return Promise.reject(new Error(res.statusText));

@@ -31,8 +31,10 @@ export const addNewContacts = createAsyncThunk(
 
 export const newDelContact = createAsyncThunk(
   "contacts/delContact",
-  async (contact) => {
-    const contacts = await delContact(contact);
+  async (contact, thunkAPI) => {
+    console.log(contact);
+    const state = thunkAPI.getState();
+    const contacts = await delContact(contact, state.account.token);
     return contacts;
   }
 );
