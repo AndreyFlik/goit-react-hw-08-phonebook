@@ -4,9 +4,9 @@ import { BrowserRouter } from "react-router-dom";
 
 import "reset-css";
 import { Provider } from "react-redux";
-// import { PersistGate } from "redux-persist/integration/react";
-// import { store, persistor } from "./redux/store";
-import { store } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./redux/store";
+// import { store } from "./redux/store";
 
 import "./index.css";
 
@@ -16,9 +16,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        {/* <PersistGate loading={null} persistor={persistor}> */}
-        <App />
-        {/* </PersistGate> */}
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

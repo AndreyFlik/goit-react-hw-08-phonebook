@@ -40,7 +40,7 @@ const addContact = async (contact, token) => {
 };
 
 const delContact = async (contacts, token) => {
-  console.log(contacts[0].id);
+  // console.log(contacts[0].id);
   const res = await fetch(`${BASE_URL}/contacts/${contacts[0].id}`, {
     method: "DELETE",
     headers: {

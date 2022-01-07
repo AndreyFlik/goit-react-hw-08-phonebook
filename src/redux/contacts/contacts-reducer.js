@@ -26,7 +26,8 @@ const entities = createReducer([], {
   [getContacts.fulfilled]: (_, action) => action.payload,
   [addNewContacts.fulfilled]: (state, action) => [action.payload, ...state],
   [newDelContact.fulfilled]: (state, action) =>
-    state.filter((item) => item.id !== action.payload.id),
+    // console.log(action.meta.arg[0].id),
+    state.filter((item) => item.id !== action.meta.arg[0].id),
 });
 
 const isLoading = createReducer(false, {
