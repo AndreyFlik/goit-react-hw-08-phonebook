@@ -88,4 +88,18 @@ const loginOut = async (token) => {
   }
   return res.json();
 };
-export { register, login, loginOut };
+const fetchCurrentUser = async (token) => {
+  // console.log(token);
+  const res = await fetch(`${BASE_URL}/users/current`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+  });
+  if (!res.ok) {
+    return Promise.reject(new Error(res.statusText));
+  }
+  return res.json();
+};
+export { register, login, loginOut, fetchCurrentUser };

@@ -1,11 +1,7 @@
 import { createLogger } from "redux-logger";
 import { configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
-import {
-  contactsReducer,
-  account,
-  isLogin,
-} from "../redux/contacts/contacts-reducer";
+import { contactsReducer, account } from "../redux/contacts/contacts-reducer";
 import {
   persistStore,
   persistReducer,
@@ -20,7 +16,7 @@ import {
 const persistContactsConfig = {
   key: "account",
   storage,
-  whitelist: ["token", "user"],
+  whitelist: ["token"],
 };
 
 const logger = createLogger({
@@ -34,7 +30,6 @@ const store = configureStore({
     contacts: contactsReducer,
     account: persistReducer(persistContactsConfig, account),
     // account,
-    isLogin,
   },
   //   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   //   devTools: process.env.NODE_ENV !== "production",

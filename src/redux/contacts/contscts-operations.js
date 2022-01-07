@@ -5,6 +5,7 @@ import {
   register,
   login,
   loginOut,
+  fetchCurrentUser,
 } from "../../Components/services/api";
 
 import { createAsyncThunk, createAction } from "@reduxjs/toolkit";
@@ -71,3 +72,20 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     console.log(error);
   }
 });
+export const getCurrentUser = createAsyncThunk(
+  "auth/refresh",
+  async (_, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState();
+      // console.log(state.account.token);
+      if (state.account.token === null) {
+        console.log("Токена нет, уходим из fetchCurrentUser");
+        return thunkAPI.rejectWithValue();
+      }
+      const newRegister = await fetchCurrentUser(state.account.token);
+      return newRegister;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);

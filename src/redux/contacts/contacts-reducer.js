@@ -8,6 +8,7 @@ import {
   addNewAccount,
   loginAccount,
   logOut,
+  getCurrentUser,
 } from "./contscts-operations";
 
 // {
@@ -48,18 +49,30 @@ const entitiesFilter = createReducer("", {
 const initialState = {
   user: { name: null, email: null },
   token: null,
+  isLogin: false,
 };
 
 const account = createReducer(initialState, {
-  [addNewAccount.fulfilled]: (_, action) => action.payload,
-  [loginAccount.fulfilled]: (_, action) => action.payload,
+  [addNewAccount.fulfilled]: (_, action) => ({
+    ...action.payload,
+    isLogin: true,
+  }),
+  [loginAccount.fulfilled]: (_, action) => ({
+    ...action.payload,
+    isLogin: true,
+  }),
+  [getCurrentUser.fulfilled]: (state, { payload }) => ({
+    ...state,
+    user: { ...payload },
+    isLogin: true,
+  }),
   [logOut.fulfilled]: () => initialState,
 });
 
-const isLogin = createReducer(false, {
-  [addNewAccount.fulfilled]: () => true,
-  [loginAccount.fulfilled]: () => true,
-});
+// const isLogin = createReducer(false, {
+//   [addNewAccount.fulfilled]: () => true,
+//   [loginAccount.fulfilled]: () => true,
+// });
 
 const contactsReducer = combineReducers({
   items: entities,
@@ -68,4 +81,4 @@ const contactsReducer = combineReducers({
 });
 // const authReducer = combineReducers({ account, isLogin });
 
-export { contactsReducer, account, isLogin };
+export { contactsReducer, account };
