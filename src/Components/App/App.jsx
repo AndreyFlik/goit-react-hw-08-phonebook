@@ -27,12 +27,12 @@ const App = () => {
       {!loading && (
         <nav>
           <NavLink to="/">StartPage</NavLink>
-          {loading && (
+          {!isLogIn && (
             <NavLink to="/Login" exact>
               Login
             </NavLink>
           )}
-          {loading && (
+          {!isLogIn && (
             <NavLink to="/Register" exact>
               Register
             </NavLink>
