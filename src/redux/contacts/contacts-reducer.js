@@ -45,7 +45,11 @@ const isLoading = createReducer(false, {
 const entitiesFilter = createReducer("", {
   [changeFilter]: (_, action) => action.payload,
 });
-
+const showContacts = createReducer(false, {
+  [getCurrentUser.pending]: () => true,
+  [getCurrentUser.fulfilled]: () => false,
+  [getCurrentUser.rejected]: () => false,
+});
 const initialState = {
   user: { name: null, email: null },
   token: null,
@@ -81,4 +85,4 @@ const contactsReducer = combineReducers({
 });
 // const authReducer = combineReducers({ account, isLogin });
 
-export { contactsReducer, account };
+export { contactsReducer, account, showContacts };
