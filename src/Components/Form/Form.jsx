@@ -4,10 +4,6 @@ import PropTypes from "prop-types";
 import s from "./Form.module.css";
 
 const Form = ({ addList }) => {
-  // state = {
-  //   name: "",
-  //   number: "",
-  // };
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
 
@@ -57,7 +53,11 @@ const Form = ({ addList }) => {
           required
         />
       </label>
-      <button type="submit">Add Contact</button>
+      <div>
+        <button className={s.UserMenuButton} type="submit">
+          Add Contact
+        </button>
+      </div>
     </form>
   );
 };

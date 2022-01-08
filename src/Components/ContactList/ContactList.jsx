@@ -9,7 +9,11 @@ const ContactList = ({ filtered, del }) => {
       {filtered.map((contact) => (
         <li key={contact.id} className={s.styleContact}>
           Name: {contact.name} Tel: {contact.number}
-          <button onClick={() => del(contact.id)} type="button">
+          <button
+            className={s.UserMenuButton}
+            onClick={() => del(contact.id)}
+            type="button"
+          >
             Delete
           </button>
         </li>

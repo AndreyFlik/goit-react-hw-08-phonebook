@@ -1,9 +1,27 @@
 .inputStile {
   outline: none;
-  margin-bottom: 10px;
   width: 200px;
 }
 .labelStile {
   margin-right: 10px;
   color: indi;
+}
+.UserMenuButton {
+  padding: 5px 5px;
+  font-size: 15px;
+  background-color: rebeccapurple;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid grey;
+}
+.UserMenuButton:focus,
+.UserMenuButton:hover {
+  background-color: white;
+}
+
+.formWrap {
+  display: flex;
+  align-items: flex-end;
+
+  margin-bottom: 10px;
 }

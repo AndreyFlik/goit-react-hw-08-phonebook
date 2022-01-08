@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import s from "./Login.module.css";
 
 import { loginAccount } from "../../redux/contacts/contscts-operations";
 
@@ -24,8 +25,8 @@ const Login = () => {
   };
   return (
     <div>
-      <h2>Login Page</h2>
-      <form onSubmit={handleSubmit}>
+      <h2 className={s.title}>Login Page</h2>
+      <form onSubmit={handleSubmit} className={s.Wrap}>
         <label>
           e-mail
           <input
@@ -46,7 +47,11 @@ const Login = () => {
             required
           />
         </label>
-        <button type="submit">Sign up</button>
+        <div>
+          <button className={s.UserMenuButton} type="submit">
+            Sign up
+          </button>
+        </div>
       </form>
     </div>
   );
