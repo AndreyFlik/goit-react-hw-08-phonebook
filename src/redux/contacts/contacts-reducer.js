@@ -11,23 +11,10 @@ import {
   getCurrentUser,
 } from "./contscts-operations";
 
-// {
-//   contacts: {
-//     items: [],
-//     filter: ''
-//   }
-// }
-
-// const itemsReducer = createReducer([], (builder) => {
-//   builder.addCase(addContact, (state, action) => [...state, action.payload]);
-//   builder.addCase(setContact, (_, action) => action.payload);
-//   builder.addCase(delContact, (_, action) => action.payload);
-// });
 const entities = createReducer([], {
   [getContacts.fulfilled]: (_, action) => action.payload,
   [addNewContacts.fulfilled]: (state, action) => [action.payload, ...state],
   [newDelContact.fulfilled]: (state, action) =>
-    // console.log(action.meta.arg[0].id),
     state.filter((item) => item.id !== action.meta.arg[0].id),
 });
 
@@ -73,16 +60,10 @@ const account = createReducer(initialState, {
   [logOut.fulfilled]: () => initialState,
 });
 
-// const isLogin = createReducer(false, {
-//   [addNewAccount.fulfilled]: () => true,
-//   [loginAccount.fulfilled]: () => true,
-// });
-
 const contactsReducer = combineReducers({
   items: entities,
   filter: entitiesFilter,
   loading: isLoading,
 });
-// const authReducer = combineReducers({ account, isLogin });
 
 export { contactsReducer, account, showContacts };

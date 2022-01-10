@@ -33,7 +33,6 @@ export const addNewContacts = createAsyncThunk(
 export const newDelContact = createAsyncThunk(
   "contacts/delContact",
   async (contact, thunkAPI) => {
-    // console.log(contact);
     const state = thunkAPI.getState();
     const contacts = await delContact(contact, state.account.token);
     return contacts;
@@ -64,9 +63,7 @@ export const loginAccount = createAsyncThunk("auth/login", async (logAcc) => {
 export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     const state = thunkAPI.getState();
-    // console.log(state.account[0].token);
     const userLogOut = await loginOut(state.account.token);
-    // state.account[0].token = "";
     return userLogOut;
   } catch (error) {
     console.log(error);
@@ -77,9 +74,7 @@ export const getCurrentUser = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      // console.log(state.account.token);
       if (state.account.token === null) {
-        // console.log("Токена нет, уходим из fetchCurrentUser");
         return thunkAPI.rejectWithValue();
       }
       const getUser = await fetchCurrentUser(state.account.token);

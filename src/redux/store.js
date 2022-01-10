@@ -30,15 +30,10 @@ const logger = createLogger({
 
 const store = configureStore({
   reducer: {
-    // contacts: persistReducer(persistContactsConfig, contactsReducer),
     contacts: contactsReducer,
     account: persistReducer(persistContactsConfig, account),
     showContacts,
-    // account,
   },
-  //   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
-  //   devTools: process.env.NODE_ENV !== "production",
-  // });
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
