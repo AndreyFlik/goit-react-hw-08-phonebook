@@ -40,7 +40,6 @@ const addContact = async (contact, token) => {
 };
 
 const delContact = async (contacts, token) => {
-  // console.log(contacts[0].id);
   const res = await fetch(`${BASE_URL}/contacts/${contacts[0].id}`, {
     method: "DELETE",
     headers: {
@@ -54,8 +53,6 @@ const delContact = async (contacts, token) => {
 };
 export { fetchContacts, addContact, delContact };
 
-// const BASE_URLL = "https://connections-api.herokuapp.com";
-
 const register = async (newAcc) => {
   const res = await fetch(`${BASE_URL}/users/signup`, post(newAcc));
   if (!res.ok) {
@@ -65,7 +62,6 @@ const register = async (newAcc) => {
 };
 
 const login = async (logAcc) => {
-  // console.log();
   const res = await fetch(`${BASE_URL}/users/login`, post(logAcc));
   if (!res.ok) {
     return Promise.reject(new Error(res.statusText));
@@ -74,8 +70,6 @@ const login = async (logAcc) => {
 };
 
 const loginOut = async (token) => {
-  // const state = thunkAPI.getState();
-  console.log(token);
   const res = await fetch(`${BASE_URL}/users/logout`, {
     method: "POST",
     headers: {
@@ -89,7 +83,6 @@ const loginOut = async (token) => {
   return res.json();
 };
 const fetchCurrentUser = async (token) => {
-  // console.log(token);
   const res = await fetch(`${BASE_URL}/users/current`, {
     method: "GET",
     headers: {
