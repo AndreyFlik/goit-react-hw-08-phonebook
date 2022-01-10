@@ -54,8 +54,8 @@ export const addNewAccount = createAsyncThunk(
 
 export const loginAccount = createAsyncThunk("auth/login", async (logAcc) => {
   try {
-    const newRegister = await login(logAcc);
-    return newRegister;
+    const loginUser = await login(logAcc);
+    return loginUser;
   } catch (error) {
     console.log(error);
   }
@@ -65,9 +65,9 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     const state = thunkAPI.getState();
     // console.log(state.account[0].token);
-    const newRegister = await loginOut(state.account.token);
+    const userLogOut = await loginOut(state.account.token);
     // state.account[0].token = "";
-    return newRegister;
+    return userLogOut;
   } catch (error) {
     console.log(error);
   }
@@ -79,11 +79,11 @@ export const getCurrentUser = createAsyncThunk(
       const state = thunkAPI.getState();
       // console.log(state.account.token);
       if (state.account.token === null) {
-        console.log("Токена нет, уходим из fetchCurrentUser");
+        // console.log("Токена нет, уходим из fetchCurrentUser");
         return thunkAPI.rejectWithValue();
       }
-      const newRegister = await fetchCurrentUser(state.account.token);
-      return newRegister;
+      const getUser = await fetchCurrentUser(state.account.token);
+      return getUser;
     } catch (error) {
       console.log(error);
     }
