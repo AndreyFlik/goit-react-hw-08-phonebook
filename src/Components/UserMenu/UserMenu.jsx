@@ -4,7 +4,7 @@ import { logOut } from "../../redux/contacts/contscts-operations";
 import s from "./UserMenu.module.css";
 const UserMenu = () => {
   const dispatch = useDispatch();
-  const name = useSelector((state) => state.account.user.name);
+  const name = useSelector((state) => state?.account?.user?.name);
   return (
     <>
       {name && (

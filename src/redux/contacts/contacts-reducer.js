@@ -1,4 +1,5 @@
 import { createReducer, combineReducers } from "@reduxjs/toolkit";
+// import { toast } from "react-toastify";
 
 import {
   getContacts,
@@ -18,6 +19,10 @@ const entities = createReducer([], {
     state.filter((item) => item.id !== action.meta.arg[0].id),
 });
 
+const entitiesFilter = createReducer("", {
+  [changeFilter]: (_, action) => action.payload,
+});
+
 const isLoading = createReducer(false, {
   [getContacts.pending]: () => true,
   [getContacts.fulfilled]: () => false,
@@ -29,18 +34,12 @@ const isLoading = createReducer(false, {
   [newDelContact.fulfilled]: () => false,
   [newDelContact.rejected]: () => false,
 });
-const entitiesFilter = createReducer("", {
-  [changeFilter]: (_, action) => action.payload,
-});
-const showContacts = createReducer(false, {
-  [getCurrentUser.pending]: () => true,
-  [getCurrentUser.fulfilled]: () => false,
-  [getCurrentUser.rejected]: () => false,
-});
+
 const initialState = {
   user: { name: null, email: null },
   token: null,
   isLogin: false,
+  error: null,
 };
 
 const account = createReducer(initialState, {
@@ -48,16 +47,32 @@ const account = createReducer(initialState, {
     ...action.payload,
     isLogin: true,
   }),
+  [addNewAccount.rejected]: (state, action) => {
+    state.error = action.payload;
+  },
+  [addNewAccount.pending]: (state, _) => ({ ...state, error: null }),
+
   [loginAccount.fulfilled]: (_, action) => ({
     ...action.payload,
     isLogin: true,
   }),
+  [loginAccount.pending]: (state, _) => ({ ...state, error: null }),
+  [loginAccount.rejected]: (state, action) => {
+    state.error = action.payload;
+    // toast.error(`${action.payload}`, { position: toast.POSITION.TOP_LEFT });
+  },
   [getCurrentUser.fulfilled]: (state, { payload }) => ({
     ...state,
     user: { ...payload },
     isLogin: true,
   }),
   [logOut.fulfilled]: () => initialState,
+});
+
+const showContacts = createReducer(false, {
+  [getCurrentUser.pending]: () => true,
+  [getCurrentUser.fulfilled]: () => false,
+  [getCurrentUser.rejected]: () => false,
 });
 
 const contactsReducer = combineReducers({

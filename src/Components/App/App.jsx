@@ -3,6 +3,7 @@ import { NavLink, Route, Switch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+
 import UserMenu from "../UserMenu/UserMenu";
 import PrivateRoute from "../PrivateRoute";
 import PublicRoute from "../PublicRoute";
@@ -34,49 +35,51 @@ const App = () => {
   return (
     <>
       {!loading && (
-        <nav className={s.navMenu}>
-          <div>
-            <NavLink
-              className={s.link}
-              activeClassName={s.activeLink}
-              exact
-              to="/"
-            >
-              StartPage
-            </NavLink>
-            {!isLogIn && (
+        <>
+          <nav className={s.navMenu}>
+            <div>
               <NavLink
                 className={s.link}
                 activeClassName={s.activeLink}
-                to="/Login"
                 exact
+                to="/"
               >
-                Login
+                StartPage
               </NavLink>
-            )}
-            {!isLogIn && (
-              <NavLink
-                className={s.link}
-                activeClassName={s.activeLink}
-                to="/Register"
-                exact
-              >
-                Register
-              </NavLink>
-            )}
-            {isLogIn && (
-              <NavLink
-                exact
-                className={s.link}
-                activeClassName={s.activeLink}
-                to="/Contacts"
-              >
-                Contacts
-              </NavLink>
-            )}
-          </div>
-          {isLogIn && <UserMenu />}
-        </nav>
+              {!isLogIn && (
+                <NavLink
+                  className={s.link}
+                  activeClassName={s.activeLink}
+                  to="/Login"
+                  exact
+                >
+                  Login
+                </NavLink>
+              )}
+              {!isLogIn && (
+                <NavLink
+                  className={s.link}
+                  activeClassName={s.activeLink}
+                  to="/Register"
+                  exact
+                >
+                  Register
+                </NavLink>
+              )}
+              {isLogIn && (
+                <NavLink
+                  exact
+                  className={s.link}
+                  activeClassName={s.activeLink}
+                  to="/Contacts"
+                >
+                  Contacts
+                </NavLink>
+              )}
+            </div>
+            {isLogIn && <UserMenu />}
+          </nav>
+        </>
       )}
       {!loading && (
         <Suspense fallback={<h1>Загрузка</h1>}>
@@ -84,7 +87,7 @@ const App = () => {
             <PublicRoute restricted redirectTo="/Contacts" path="/Login">
               <Login />
             </PublicRoute>
-            <PublicRoute restricted path="/Register">
+            <PublicRoute restricted redirectTo="/Contacts" path="/Register">
               <Register />
             </PublicRoute>
             <PrivateRoute restricted redirectTo="/Login" path="/Contacts">

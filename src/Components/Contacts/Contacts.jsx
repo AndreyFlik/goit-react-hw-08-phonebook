@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import s from "./contscts.module.css";
+
 import {
   getContacts,
   addNewContacts,
@@ -44,7 +46,7 @@ const Contacts = () => {
   };
 
   const delList = (idList) => {
-    console.log(idList);
+    // console.log(idList);
     dispatch(newDelContact(contacts.filter((item) => item.id === idList)));
   };
 
@@ -58,7 +60,7 @@ const Contacts = () => {
       <h1 className={s.title}>Тел.Книга</h1>
       <Form addList={addContact} />
       {loading && <h2>Загружаю.....</h2>}
-      <h2 className={s.title}>Contacts</h2>
+      <h2 className={s.title}>Contacts List</h2>
       <Filter onChangeFilter={handleChangeFilter} filState={filter} />
       {filteredContacts.length > 0 && (
         <ContactList filtered={filteredContacts} del={delList} />

@@ -13,9 +13,13 @@ import { createAsyncThunk, createAction } from "@reduxjs/toolkit";
 export const getContacts = createAsyncThunk(
   "contacts/fetchContacts",
   async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const contacts = await fetchContacts(state.account.token);
-    return contacts;
+    try {
+      const state = thunkAPI.getState();
+      const contacts = await fetchContacts(state.account.token);
+      return contacts;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
@@ -24,41 +28,54 @@ export const changeFilter = createAction("contacts/changeFilter");
 export const addNewContacts = createAsyncThunk(
   "contacts/addContacts",
   async (contact, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const contacts = await addContact(contact, state.account.token);
-    return contacts;
-  }
-);
-
-export const newDelContact = createAsyncThunk(
-  "contacts/delContact",
-  async (contact, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const contacts = await delContact(contact, state.account.token);
-    return contacts;
-  }
-);
-
-export const addNewAccount = createAsyncThunk(
-  "auth/register",
-  async (newAccount) => {
     try {
-      const newRegister = await register(newAccount);
-      return newRegister;
+      const state = thunkAPI.getState();
+      const contacts = await addContact(contact, state.account.token);
+      return contacts;
     } catch (error) {
       console.log(error);
     }
   }
 );
 
-export const loginAccount = createAsyncThunk("auth/login", async (logAcc) => {
-  try {
-    const loginUser = await login(logAcc);
-    return loginUser;
-  } catch (error) {
-    console.log(error);
+export const newDelContact = createAsyncThunk(
+  "contacts/delContact",
+  async (contact, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState();
+      const contacts = await delContact(contact, state.account.token);
+      return contacts;
+    } catch (error) {
+      console.log(error);
+    }
   }
-});
+);
+
+export const addNewAccount = createAsyncThunk(
+  "auth/register",
+  async (newAccount, thunkAPI) => {
+    try {
+      const newRegister = await register(newAccount);
+      return newRegister;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const loginAccount = createAsyncThunk(
+  "auth/login",
+  async (logAcc, thunkAPI) => {
+    try {
+      const loginUser = await login(logAcc);
+      return loginUser;
+    } catch (error) {
+      // alert(error);
+      // console.dir(error.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {

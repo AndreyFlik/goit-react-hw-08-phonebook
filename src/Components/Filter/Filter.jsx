@@ -1,17 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import TextField from "@mui/material/TextField";
 
 const Filter = ({ onChangeFilter, filState }) => {
   return (
-    <label>
-      <p>Filter by name</p>
-      <input
-        type="text"
-        name="filter"
-        value={filState}
-        onChange={onChangeFilter}
-      />
-    </label>
+    <TextField
+      type="text"
+      name="filter"
+      value={filState}
+      onChange={onChangeFilter}
+      label="Filter by name"
+    />
   );
 };
 
