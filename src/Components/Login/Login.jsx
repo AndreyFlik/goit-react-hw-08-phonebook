@@ -84,6 +84,7 @@ const Login = () => {
             helperText={formik.touched.email && formik.errors.email}
             margin="normal"
             autoComplete="on"
+            required
           />
           <TextField
             name="password"
@@ -95,6 +96,7 @@ const Login = () => {
             helperText={formik.touched.password && formik.errors.password}
             margin="normal"
             autoComplete="off"
+            required
           />
           <div>
             <Button color="primary" variant="contained" type="submit">
