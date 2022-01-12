@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { NavLink, Route, Switch } from "react-router-dom";
+import { NavLink, Route, Switch, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -19,9 +19,9 @@ const Register = lazy(() =>
 const Login = lazy(() =>
   import("../Login/Login" /* webpackChunkName: "LoginPage"*/)
 );
-const StartPage = lazy(() =>
-  import("../StartPage/StartPage" /* webpackChunkName: "StartPage"*/)
-);
+// const StartPage = lazy(() =>
+//   import("../StartPage/StartPage" /* webpackChunkName: "StartPage"*/)
+// );
 
 const App = () => {
   const dispatch = useDispatch();
@@ -38,14 +38,14 @@ const App = () => {
         <>
           <nav className={s.navMenu}>
             <div>
-              <NavLink
+              {/* <NavLink
                 className={s.link}
                 activeClassName={s.activeLink}
                 exact
                 to="/"
               >
                 StartPage
-              </NavLink>
+              </NavLink> */}
               {!isLogIn && (
                 <NavLink
                   className={s.link}
@@ -94,7 +94,7 @@ const App = () => {
               <Contacts />
             </PrivateRoute>
             <Route path="/">
-              <StartPage />
+              {isLogIn ? <Redirect to="/Login" /> : <Redirect to="/Contacts" />}
             </Route>
           </Switch>
         </Suspense>

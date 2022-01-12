@@ -5,30 +5,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 
-// import s from "./Form.module.css";
-
 const Form = ({ addList }) => {
-  // const [name, setName] = useState("");
-  // const [number, setNumber] = useState("");
-
-  // const handleChangeName = (e) => {
-  //   setName(e.target.value);
-  // };
-  // const handleChangeContact = (e) => {
-  //   setNumber(e.target.value);
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   addList({ name, number });
-  //   reset();
-  // };
-
-  // const reset = () => {
-  //   setName("");
-  //   setNumber("");
-  // };
-
   const validate = (values) => {
     const errors = {};
     if (!values.name) {
@@ -60,8 +37,6 @@ const Form = ({ addList }) => {
     },
     validate,
     onSubmit: (values, { setSubmitting, resetForm }) => {
-      // console.log(values);
-      // alert(JSON.stringify(values, null, 2));
       addList(values);
       resetForm();
     },
@@ -110,43 +85,6 @@ const Form = ({ addList }) => {
     </Box>
   );
 };
-
-//   return (
-//     <form onSubmit={handleSubmit} className={s.formWrap}>
-//       <label className={s.labelStile}>
-//         <p>Name</p>
-//         <input
-//           className={s.inputStile}
-//           onChange={handleChangeName}
-//           value={name}
-//           type="text"
-//           name="name"
-//           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-//           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-//           required
-//         />
-//       </label>
-//       <label className={s.labelStile}>
-//         <p>Number</p>
-//         <input
-//           className={s.inputStile}
-//           onChange={handleChangeContact}
-//           value={number}
-//           type="tel"
-//           name="number"
-//           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-//           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-//           required
-//         />
-//       </label>
-//       <div>
-//         <button className={s.UserMenuButton} type="submit">
-//           Add Contact
-//         </button>
-//       </div>
-//     </form>
-//   );
-// };
 
 Form.propTypes = {
   addList: PropTypes.func,

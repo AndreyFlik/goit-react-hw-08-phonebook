@@ -36,24 +36,6 @@ const Login = () => {
 
     setOpen(false);
   };
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-
-  // useEffect(() => {
-  //   if (!errorAlert) {
-  //     return;
-  //   }
-  //   toast.error(`${errorAlert}`, {
-  //     position: "top-right",
-  //     autoClose: 5000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //   });
-  // }, [errorAlert]);
-
   const validate = (values) => {
     const errors = {};
     if (!values.email) {
@@ -62,7 +44,6 @@ const Login = () => {
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
       errors.email = "Invalid email address";
-      // alert(errors.email);
     }
     if (!values.password) {
       errors.password = "Required";
@@ -78,28 +59,9 @@ const Login = () => {
     },
     validate,
     onSubmit: (values) => {
-      // console.log(values);
-      // alert(JSON.stringify(values, null, 2));
       dispatch(loginAccount(values));
-      // setEmail("");
-      // setPassword("");
     },
   });
-  // console.log(formik.errors.password);
-  // const handleChangePassword = (e) => {
-  //   setPassword(e.target.value);
-  // };
-  // const handleChangeEmail = (e) => {
-  //   setEmail(e.target.value);
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   dispatch(loginAccount({ email, password }));
-  //   setEmail("");
-  //   setPassword("");
-  // };
-
   return (
     <div>
       <h2 className={s.title}>Login</h2>
@@ -112,7 +74,6 @@ const Login = () => {
         }}
       >
         <form onSubmit={formik.handleSubmit}>
-          {/* <form onSubmit={formik.handleSubmit} className={s.Wrap}> */}
           <TextField
             sx={{ mr: 2 }}
             name="email"
@@ -124,17 +85,6 @@ const Login = () => {
             margin="normal"
             autoComplete="on"
           />
-          {/* <label>
-          E-mail
-          <input
-            type="email"
-            name="email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            required
-          />
-          {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-        </label> */}
           <TextField
             name="password"
             label="Password"
@@ -146,23 +96,10 @@ const Login = () => {
             margin="normal"
             autoComplete="off"
           />
-          {/* <label>
-          Password
-          <input
-            type="password"
-            name="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            required
-          />
-        </label> */}
           <div>
             <Button color="primary" variant="contained" type="submit">
               Sign up
             </Button>
-            {/* <button className={s.UserMenuButton} type="submit">
-            Sign up
-          </button> */}
           </div>
         </form>
       </Box>
@@ -176,45 +113,8 @@ const Login = () => {
           </Snackbar>
         </Stack>
       )}
-      {/* <ToastContainer /> */}
     </div>
   );
 };
-
-// {
-//   /* // return (
-//   //   <div>
-//   //     <h2 className={s.title}>Login Page</h2>
-//   //     <form onSubmit={handleSubmit} className={s.Wrap}>
-//   //       <label>
-//   //         e-mail
-//   //         <input
-//   //           type="email"
-//   //           name="email"
-//   //           value={email}
-//   //           onChange={handleChangeEmail}
-//   //           required
-//   //         />
-//   //       </label>
-//   //       <label>
-//   //         password
-//   //         <input
-//   //           type="password"
-//   //           name="password"
-//   //           value={password}
-//   //           onChange={handleChangePassword}
-//   //           required
-//   //         />
-//   //       </label>
-//   //       <div>
-//   //         <button className={s.UserMenuButton} type="submit">
-//   //           Sign up
-//   //         </button>
-//   //       </div>
-//   //     </form>
-//   //   </div>
-//   // );
-// }; */
-// }
 
 export default Login;

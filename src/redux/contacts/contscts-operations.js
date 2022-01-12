@@ -70,8 +70,6 @@ export const loginAccount = createAsyncThunk(
       const loginUser = await login(logAcc);
       return loginUser;
     } catch (error) {
-      // alert(error);
-      // console.dir(error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

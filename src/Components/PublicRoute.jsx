@@ -9,7 +9,6 @@ const PublicRoute = ({
   ...routeProps
 }) => {
   const isLoggedIn = useSelector((state) => state.account.isLogin);
-  // const user = useSelector((state) => state?.account?.user?.name);
   const shouldRedirect = isLoggedIn && restricted;
 
   return (

@@ -64,9 +64,7 @@ const register = async (newAcc) => {
 
 const login = async (logAcc) => {
   const res = await fetch(`${BASE_URL}/users/login`, post(logAcc));
-  // console.log(res.status);
   if (res.status === 400) {
-    // console.log(`not OK`);
     return Promise.reject(new Error(`Неверный логин и/или пароль`));
   }
   if (!res.ok) {

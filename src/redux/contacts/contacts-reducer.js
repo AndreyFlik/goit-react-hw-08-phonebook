@@ -1,5 +1,4 @@
 import { createReducer, combineReducers } from "@reduxjs/toolkit";
-// import { toast } from "react-toastify";
 
 import {
   getContacts,
@@ -59,7 +58,6 @@ const account = createReducer(initialState, {
   [loginAccount.pending]: (state, _) => ({ ...state, error: null }),
   [loginAccount.rejected]: (state, action) => {
     state.error = action.payload;
-    // toast.error(`${action.payload}`, { position: toast.POSITION.TOP_LEFT });
   },
   [getCurrentUser.fulfilled]: (state, { payload }) => ({
     ...state,

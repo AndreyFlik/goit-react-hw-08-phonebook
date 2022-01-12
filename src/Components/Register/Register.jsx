@@ -1,4 +1,3 @@
-// import React, { useState } from "react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./Register.module.css";
@@ -34,27 +33,6 @@ const Register = () => {
     setOpen(false);
   };
 
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-
-  // const handleChangeName = (e) => {
-  //   setName(e.target.value);
-  // };
-  // const handleChangeEmail = (e) => {
-  //   setEmail(e.target.value);
-  // };
-  // const handleChangePassword = (e) => {
-  //   setPassword(e.target.value);
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   dispatch(addNewAccount({ name, email, password }));
-  //   setName("");
-  //   setEmail("");
-  //   setPassword("");
-  // };
   const validate = (values) => {
     const errors = {};
     if (!values.name) {
@@ -68,7 +46,6 @@ const Register = () => {
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
       errors.email = "Invalid email address";
-      // alert(errors.email);
     }
     if (!values.password) {
       errors.password = "Required";
@@ -85,7 +62,6 @@ const Register = () => {
     },
     validate,
     onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
       dispatch(addNewAccount(values));
     },
   });
@@ -158,50 +134,5 @@ const Register = () => {
     </>
   );
 };
-//   return (
-//     <>
-//       <h2 className={s.title}>Register Page</h2>
-//       <div>
-//         <form onSubmit={handleSubmit} className={s.Wrap}>
-//           <label>
-//             <span>Name</span>
-//             <input
-//               type="text"
-//               name="name"
-//               value={name}
-//               onChange={handleChangeName}
-//               required
-//             />
-//           </label>
-//           <label>
-//             <span>e-mail</span>
-//             <input
-//               type="email"
-//               name="email"
-//               value={email}
-//               onChange={handleChangeEmail}
-//               required
-//             />
-//           </label>
-//           <label>
-//             <span>password</span>
-//             <input
-//               type="password"
-//               name="password"
-//               value={password}
-//               onChange={handleChangePassword}
-//               required
-//             />
-//           </label>
-//           <div>
-//             <button className={s.UserMenuButton} type="submit">
-//               Create new Account
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-//     </>
-//   );
-// };
 
 export default Register;
