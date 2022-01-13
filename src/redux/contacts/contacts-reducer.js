@@ -13,7 +13,7 @@ import {
 
 const entities = createReducer([], {
   [getContacts.fulfilled]: (_, action) => action.payload,
-  [addNewContacts.fulfilled]: (state, action) => [action.payload, ...state],
+  [addNewContacts.fulfilled]: (state, action) => [...state, action.payload],
   [newDelContact.fulfilled]: (state, action) =>
     state.filter((item) => item.id !== action.meta.arg[0].id),
 });
