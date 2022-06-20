@@ -1,6 +1,7 @@
 // import React from "react";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -13,11 +14,11 @@ import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 
-import { loginAccount } from "../../redux/contacts/contscts-operations";
+// import { loginAccount } from "../../redux/contacts/contscts-operations";
 import s from "./Login.module.css";
 
 const Login = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const errorAlert = useSelector((state) => state?.account?.error);
 
   const [open, setOpen] = useState(false);
@@ -58,8 +59,10 @@ const Login = () => {
       password: "",
     },
     validate,
-    onSubmit: (values) => {
-      dispatch(loginAccount(values));
+    onSubmit: (e, values) => {
+      // dispatch(loginAccount(values));
+      console.log(e);
+      console.log(values);
     },
   });
   return (
@@ -84,7 +87,7 @@ const Login = () => {
             helperText={formik.touched.email && formik.errors.email}
             margin="normal"
             autoComplete="on"
-            required
+            // required
           />
           <TextField
             name="password"
@@ -96,11 +99,24 @@ const Login = () => {
             helperText={formik.touched.password && formik.errors.password}
             margin="normal"
             autoComplete="off"
-            required
+            // required
           />
           <div>
-            <Button color="primary" variant="contained" type="submit">
+            <Button
+              name="log"
+              color="primary"
+              variant="contained"
+              type="submit"
+            >
               Sign up
+            </Button>
+            <Button
+              name="reg"
+              color="primary"
+              variant="contained"
+              type="button"
+            >
+              Reg
             </Button>
           </div>
         </form>

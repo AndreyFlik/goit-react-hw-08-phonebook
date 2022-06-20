@@ -32,8 +32,8 @@ const Form = ({ addList }) => {
   };
   const formik = useFormik({
     initialValues: {
-      name: "",
-      number: "",
+      name: "kek",
+      number: "kekw",
     },
     validate,
     onSubmit: (values, { setSubmitting, resetForm }) => {
